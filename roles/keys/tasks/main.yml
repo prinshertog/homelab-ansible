@@ -1,0 +1,10 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/keys
+- name: Copy keys to right location
+  copy:
+    src: keys/
+    dest: /root/.ssh
+    mode: '0400'
+    owner: root
+    group: root

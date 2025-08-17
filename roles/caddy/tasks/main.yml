@@ -1,0 +1,61 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for caddy
+- name: Caddy
+  block:
+    - name: Clear previous files
+      shell: rm -rf /etc/caddy/*
+
+    - name: Pull caddy files from backup
+      environment:
+        BORG_RSH: "{{ BORG_RSH }}"
+        BORG_REPO: "{{ BORG_REPO }}"
+        BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+      shell:
+        cmd: "borg extract --strip-components 2 -v --list {{ BORG_REPO }}::{{ VERSION }} {{ caddyfolder }}"
+        chdir: "{{ caddyfolder }}"
+      async: 3600
+      poll: 10
+
+    - name: Change permissions to root
+      file:
+        path: "{{ caddyfolder }}"
+        state: directory
+        recurse: yes
+        owner: root
+        group: root
+
+    - name: Restart caddy
+      service:
+        name: caddy
+        state: restarted
+
+- name: Download and install websites
+  block:
+    - name: Ensure html folder exists
+      file: 
+        path: "{{ websitefolder }}"
+        state: directory
+        mode: '0755'
+
+    - name: Change the file permissions for websites
+      file:
+        path: "{{ websitefolder }}"
+        state: directory
+        recurse: yes
+        owner: root
+        group: root
+
+    - name: Clear the website folder - {{ websitefolder }}
+      shell: "rm -rf {{ websitefolder }}/*"
+
+    - name: Restore website folder - {{ websitefolder }}
+      environment:
+        BORG_RSH: "{{ BORG_RSH }}"
+        BORG_REPO: "{{ BORG_REPO }}"
+        BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+      shell:
+        cmd: "borg extract --strip-components 3 -v --list {{ BORG_REPO }}::{{ VERSION }} {{ websitefolder }}"
+        chdir: "{{ websitefolder }}"
+      async: 3600
+      poll: 10

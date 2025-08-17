@@ -1,0 +1,84 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for docker
+
+- name: Create keyrings directory
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: Download Docker's GPG key
+  get_url:
+    url: https://download.docker.com/linux/debian/gpg
+    dest: /etc/apt/keyrings/docker.asc
+    mode: '0644'
+
+- name: Add Docker repository
+  shell: |
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+- name: Install Docker
+  apt:
+    name: 
+      - docker-ce 
+      - docker-ce-cli 
+      - containerd.io 
+      - docker-buildx-plugin 
+      - docker-compose-plugin
+    state: present
+    update_cache: yes
+
+- name: Start and enable Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Create group dockeruser for docker
+  group:
+    name: dockeruser
+    state: present
+
+- name: Create user dockeruser for docker
+  user:
+    name: dockeruser
+    groups: dockeruser,docker
+    uid: 1010
+    append: yes
+
+- name: Change the file permissions for docker
+  file:
+    path: "{{ dockerfolder }}"
+    state: directory
+    recurse: yes
+    owner: dockeruser
+    group: dockeruser
+
+- name: Stop old docker containers
+  shell:
+    cmd: "docker compose down"
+    chdir: "{{ dockerfolder }}/{{ item }}"
+  loop: "{{ containers }}"
+  ignore_errors: true
+  become: yes
+  become_user: dockeruser
+
+- name: Create docker network
+  community.docker.docker_network:
+    name: docker-network
+    state: present
+    ipam_config:
+      - subnet: 172.21.0.0/24
+  become: yes
+  become_user: dockeruser
+
+- name: Start docker containers
+  shell:
+    cmd: "docker compose up -d"
+    chdir: "{{ dockerfolder }}/{{ item }}"
+  loop: "{{ containers }}"
+  become: yes
+  become_user: dockeruser
+  ignore_errors: true

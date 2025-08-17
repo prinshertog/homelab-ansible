@@ -1,0 +1,14 @@
+- name: Server Ansible Script
+  become: yes
+  become_user: root
+  hosts: all
+  vars_files:
+    - inventory/vars/secrets.yml
+  roles:
+    - packages
+    - keys
+    - caddy
+    - scripts
+    - services
+    - docker
+    - gameservers

@@ -1,0 +1,56 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for services
+
+- name: Create group steam for gameservers
+  group:
+    name: steam
+    state: present
+
+- name: Create user steam for gameservers
+  user:
+    name: steam
+    group: steam
+    uid: 1001
+
+- name: Change the file permissions for gameservers
+  file:
+    path: "{{ gameserversfolder }}"
+    state: directory
+    recurse: yes
+    owner: steam
+    group: steam
+  
+- name: setup steamcmd
+  block:
+    - name: Pre-accept Steam license agreement
+      debconf:
+        name: steamcmd
+        question: steam/question
+        value: "I AGREE"
+        vtype: select
+        
+    - name: Install software-properties-common
+      apt:
+        name: software-properties-common
+        state: present
+
+    - name: Enable non-free repository
+      apt_repository:
+        repo: 'deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware'
+        state: present
+        filename: 'non-free'
+
+    - name: Add i386 architecture
+      command: dpkg --add-architecture i386
+      args:
+        creates: /etc/dpkg/dpkg.cfg.d/multiarch
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install steamcmd
+      apt:
+        name: steamcmd
+        state: present

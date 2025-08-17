@@ -1,0 +1,42 @@
+VERSION: 2025-08-17_13:00
+websitefolder: /var/www/html
+servicesfolder: /opt
+scriptsfolder: /etc/scripts
+dockerfolder: /opt/docker
+sambaconfigfolder: /etc/samba
+caddyfolder: /etc/caddy
+gameserversfolder: /opt/gameservers
+wireguardconfig: /etc/wireguard
+services:
+  #- astroneer
+  - kiwix
+  #- palworld
+  - syncthing
+  #- terraria
+# samba_users:
+#   - jan
+containers:
+  - filebrowser
+  - synapse
+  - radarr
+  - sonarr
+  - jellyfin
+  - transmission
+  - uptimekuma
+  - ghost-thor
+  - searxng
+  - roundcube
+  - jackett
+  - kokenmetlisa
+  - bazarr
+packages:
+  - sudo
+  - ca-certificates
+  - curl
+  - rsync
+  - borgbackup
+  - cockpit
+  - caddy
+  - netfilter-persistent
+  - iptables
+  - samba
