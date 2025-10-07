@@ -13,6 +13,7 @@ services:
   #- palworld
   - syncthing
   #- terraria
+  - github-runner
 # samba_users:
 #   - jan
 containers:
@@ -40,3 +41,5 @@ packages:
   - netfilter-persistent
   - iptables
   - samba
+  - vim
+  - ncdu
