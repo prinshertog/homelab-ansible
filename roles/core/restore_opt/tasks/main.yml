@@ -1,0 +1,15 @@
+- name: Restore opt folder
+  block:
+    - name: Clear the opt folder
+      shell: "rm -rf /opt/*"
+
+    - name: Restore opt folder contents
+      environment:
+        BORG_RSH: "{{ BORG_RSH }}"
+        BORG_REPO: "{{ BORG_REPO }}"
+        BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+      shell:
+        cmd: "borg extract --strip-components 1 -v --list {{ BORG_REPO }}::{{ VERSION }} /opt"
+        chdir: "/opt"
+      async: 3600
+      poll: 10

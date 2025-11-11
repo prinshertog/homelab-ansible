@@ -1,35 +1,21 @@
-VERSION: 2025-08-17_13:00
+VERSION: 2025-11-11_20:11
 websitefolder: /var/www/html
-servicesfolder: /opt
 scriptsfolder: /etc/scripts
-dockerfolder: /opt/docker
 sambaconfigfolder: /etc/samba
 caddyfolder: /etc/caddy
-gameserversfolder: /opt/gameservers
 wireguardconfig: /etc/wireguard
-services:
-  #- astroneer
-  - kiwix
-  #- palworld
-  - syncthing
-  #- terraria
-  - github-runner
-# samba_users:
-#   - jan
+users_with_home:
+  - jan
+users_no_home:
+  - mathijs
+  - ignas
+  - steam
+  - dockeruser
+samba_users:
+  - jan
+  - ignas
 containers:
-  - filebrowser
-  - synapse
-  - radarr
-  - sonarr
-  - jellyfin
-  - transmission
-  - uptimekuma
-  - ghost-thor
-  - searxng
-  - roundcube
-  - jackett
-  - kokenmetlisa
-  - bazarr
+  - dockge
 packages:
   - sudo
   - ca-certificates
@@ -43,3 +29,5 @@ packages:
   - samba
   - vim
   - ncdu
+  - ssh
+  - tree

@@ -5,10 +5,17 @@
   vars_files:
     - inventory/vars/secrets.yml
   roles:
-    - packages
-    - keys
-    - caddy
-    - scripts
-    - services
-    - docker
-    - gameservers
+    #- core/packages
+    #- core/users
+    #- core/keys
+    #- core/caddy
+    #- core/scripts
+    #- core/cron
+    #- core/restore_opt
+    #- docker/install_docker
+    #- docker/containers
+    - services/restore_service_files
+    - services/websites
+    - services/samba
+    - services/install_steamcmd
+    - services/wireguard

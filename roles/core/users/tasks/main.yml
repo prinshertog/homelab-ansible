@@ -1,0 +1,17 @@
+- name: Create users with home
+  user:
+    name: "{{ item }}"
+    create_home: true
+    shell: /bin/bash
+  loop: "{{ users_with_home }}"
+
+- name: Create users without home
+  user:
+    name: "{{ item }}"
+    create_home: false
+    shell: /bin/bash
+  loop: "{{ users_no_home }}"
+
+- name: Give Jan user sudo access
+  shell:
+    cmd: sudo usermod -aG sudo jan

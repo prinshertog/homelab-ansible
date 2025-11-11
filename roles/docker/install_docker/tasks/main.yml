@@ -1,7 +1,3 @@
-#SPDX-License-Identifier: MIT-0
----
-# tasks file for docker
-
 - name: Create keyrings directory
   file:
     path: /etc/apt/keyrings
@@ -47,38 +43,3 @@
     groups: dockeruser,docker
     uid: 1010
     append: yes
-
-- name: Change the file permissions for docker
-  file:
-    path: "{{ dockerfolder }}"
-    state: directory
-    recurse: yes
-    owner: dockeruser
-    group: dockeruser
-
-- name: Stop old docker containers
-  shell:
-    cmd: "docker compose down"
-    chdir: "{{ dockerfolder }}/{{ item }}"
-  loop: "{{ containers }}"
-  ignore_errors: true
-  become: yes
-  become_user: dockeruser
-
-- name: Create docker network
-  community.docker.docker_network:
-    name: docker-network
-    state: present
-    ipam_config:
-      - subnet: 172.21.0.0/24
-  become: yes
-  become_user: dockeruser
-
-- name: Start docker containers
-  shell:
-    cmd: "docker compose up -d"
-    chdir: "{{ dockerfolder }}/{{ item }}"
-  loop: "{{ containers }}"
-  become: yes
-  become_user: dockeruser
-  ignore_errors: true

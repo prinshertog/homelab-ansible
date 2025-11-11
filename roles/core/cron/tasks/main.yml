@@ -1,0 +1,27 @@
+- name: Cronjobs
+  block:
+    - name: Edit Crontab for Borg Backup Cloud
+      cron:
+        name: Borg Backup Cloud
+        minute: "0"
+        hour: "0"
+        job: "{{ scriptsfolder }}/borgbackup.sh"
+
+    - name: Mirror crontab job
+      cron:
+        name: Mirror sync job
+        minute: "0"
+        hour: "2"
+        job: "{{ scriptsfolder }}/sync.sh"
+
+    - name: Duckdns crontab job
+      cron:
+        name: Duckdns job
+        special_time: reboot
+        job: "sleep 300 && {{ scriptsfolder }}/duckdns.sh"
+
+    - name: Hetzner auto dns crontab job
+      cron:
+        name: Hetzner auto dns
+        special_time: reboot
+        job: "sleep 300 && {{ scriptsfolder }}/hetznerchangednsscript.sh"

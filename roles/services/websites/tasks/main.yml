@@ -1,0 +1,24 @@
+- name: Download and install websites
+  block:
+    - name: Change the file permissions for websites
+      file:
+        path: "{{ websitefolder }}"
+        state: directory
+        recurse: yes
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Clear the website folder - {{ websitefolder }}
+      shell: "rm -rf {{ websitefolder }}/*"
+
+    - name: Restore website folder - {{ websitefolder }}
+      environment:
+        BORG_RSH: "{{ BORG_RSH }}"
+        BORG_REPO: "{{ BORG_REPO }}"
+        BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+      shell:
+        cmd: "borg extract --strip-components 3 -v --list {{ BORG_REPO }}::{{ VERSION }} {{ websitefolder }}"
+        chdir: "{{ websitefolder }}"
+      async: 3600
+      poll: 10

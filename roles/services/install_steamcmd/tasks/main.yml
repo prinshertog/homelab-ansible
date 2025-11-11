@@ -1,0 +1,10 @@
+- name: setup steamcmd
+  block:
+    - name: Add i386 architecture repo
+      shell:
+        cmd: dpkg --add-architecture i386
+    - name: Install steamcmd
+      apt:
+        name: steamcmd
+        state: present
+        update_cache: true

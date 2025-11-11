@@ -1,0 +1,24 @@
+- name: wireguard
+  block:
+    - name: Install wireguard
+      apt:
+        name: wireguard
+        update_cache: true
+        state: present
+
+    - name: Restore wireguard config from backup
+      environment:
+        BORG_RSH: "{{ BORG_RSH }}"
+        BORG_REPO: "{{ BORG_REPO }}"
+        BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+      shell:
+        cmd: "borg extract --strip-components 2 -v --list {{ BORG_REPO }}::{{ VERSION }} {{ wireguardconfig }}"
+        chdir: "{{ wireguardconfig }}"
+      async: 3600
+      poll: 10
+
+    - name: Enable and start wireguard
+      systemd:
+        name: "wg-quick@wg0"
+        enabled: true
+        state: restarted
