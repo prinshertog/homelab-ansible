@@ -45,9 +45,9 @@ Caddy runt als een service, en is geinstalleerd via apt.
 
 ## Ansible
 
-core - Alle systemen die weker aanwezig moeten zijn voor een basis werking.
-docker - Alles wat met docker te maken heeft.
-services - Andere services die op de server staan.
+- core: Alle systemen die weker aanwezig moeten zijn voor een basis werking.
+- docker: Alles wat met docker te maken heeft.
+- services: Andere services die op de server staan.
 
 ## Wireguard
 
@@ -64,20 +64,14 @@ Dit op host een index pagina met alle services die dan ook beschikbaar zijn als 
 
 `/etc/systemd/system`
 
-Palworld
-Terraria
-Astroneer
-
 Runnen allemaal in services die in de map /etc/systemd/system zitten.
+Services hebben een prefix "custom-" zodat de service bestanden die gebackupt moeten worden gemakkelijk gescheiden kunnen worden van de normale system files.
 
 ## Scripts
 
 `/etc/scripts`
 
-Cloud backup script - Hierbij wordt de OS schijf gebackupt, dit is de backup met alle services.
-Mirror sync - Voor de arch linux mirror, elke dag wordt deze gesynct
-Duckdns sync - Om dynamic dns mogelijk te maken aangezien een static ip veel kost.
-Hetzner sync - Om dynamic dns ook mogelijk te maken, dat het ip automatisch wordt geupdatet op hetzner.
+Hier staan de scripts die grotendeels uitgevoerd worden door cron jobs.
 
 ## Firewall
 
@@ -90,10 +84,3 @@ Er wordt gebruik gemaakt van iptables om alles op te zetten er is een script met
 `/var/www/html`
 
 De websites zitten in deze folder.
-
-## Users
-
-- Jan
-- dockeruser
-- steam
-- root
