@@ -28,6 +28,7 @@ packages:
   - iptables
   - samba
   - vim
+  - neovim
   - ncdu
   - ssh
   - tree

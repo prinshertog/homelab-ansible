@@ -1,0 +1,8 @@
+- name: Set caddy path variables
+  set_fact:
+    keyPath: "/root/.ssh"
+
+- name: Is ssh key folder present
+  debug:
+    msg: "Is ssh key folder present"
+  when: keyPath is directory

@@ -1,0 +1,20 @@
+- name: Set caddy path variables
+  set_fact:
+    caddyPath: "/etc/caddy"
+    sitesPath: "/etc/caddy/sites"
+    rootConfig: "/etc/caddy/sites/freedombox.be"
+
+- name: Is caddy config folder present
+  debug:
+    msg: "Is caddy config folder present"
+  when: caddyPath is directory
+
+- name: Is sites folder present
+  debug:
+    msg: "Is sites folder present"
+  when: sitesPath is directory
+
+- name: Is root config present
+  debug:
+    msg: "Is root config present"
+  when: rootConfig is file

@@ -4,8 +4,8 @@
 
 Mijn server bestaat momenteel uit:
 
-- 2x (SATA) HDD 8TB (RAID 1)
-- 1x (M.2 NVMe) SSD (OS)
+- 2x (SATA) HDD 8TB (RAID 1) (/mnt/HDD)
+- 1x (M.2 NVMe) SSD (OS) (/)
 
 ## Borg backup
 
@@ -45,9 +45,9 @@ Caddy runt als een service, en is geinstalleerd via apt.
 
 ## Ansible
 
-services - bij vars, kiezen welke services moeten gestart worden.
-packages - om packages toe te voegen.
-docker - containers kiezen die moeten gestart worden.
+core - Alle systemen die weker aanwezig moeten zijn voor een basis werking.
+docker - Alles wat met docker te maken heeft.
+services - Andere services die op de server staan.
 
 ## Wireguard
 
