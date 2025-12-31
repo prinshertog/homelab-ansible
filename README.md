@@ -20,11 +20,11 @@ Het handige aan borg backup is dat deze alleen backups maakt van bestanden die a
 
 `/opt/docker`
 
-Alle docker containers maken gebruik van system mounted volumes, geen docker volumes.
+Alle docker containers maken gebruik van system mounted volumes, geen docker volumes. Dit omdat het voor mijn oplossing backups gemakkelijker maakt.
 
 De docker containers zijn ook allemaal toegevoegd aan hetzelfde docker network, met als naam `docker-network`.
 
-Aangezien docker zijn eingen iptables firewall beheerd, heb ik bij elke poort van de docker containers die niet publiek mogen zijn het lokaal adres 10.0.0.1 gezet zodat de poorten niet worden geforward. 10.0.0.1 omdat dit het subnet van mijn wireguard setup is. Dit zorgt ervoor dat ik gewoon aan mijn "Lokale" docker services kan met mijn wireguard vpn.
+Aangezien docker zijn eingen iptables firewall beheerd, heb ik bij elke poort van de docker containers die niet publiek mogen zijn het lokaal adres `10.0.0.1` gezet zodat de poorten niet worden geforward. `10.0.0.1` omdat dit het subnet van mijn wireguard setup is. Dit zorgt ervoor dat ik gewoon aan mijn "Lokale" docker services kan met mijn wireguard vpn.
 
 De ansible-playbook is volledig voorzien om deze docker containers perfect te installeren, in het vars bestand worden de namen van deze docker containers opgelijst. Dit zodat het script weet welke docker containers er in de backup zitten.
 
@@ -36,7 +36,7 @@ Caddy is een reverse-proxy die al mijn domeinnamen beheerd. Caddy zorgt ook auto
 
 `/etc/caddy`
 
-Mijn caddy setup bestaat uit 1 Caddyfile met een import naar mijn andere sites configuratie bestanden. Elk bestand is specifiek voor een domein of subdomein dit configuratie bestand heeft ook de respectiefelijke naam van deze domein of subdomein.
+Mijn caddy setup bestaat uit 1 Caddyfile met een import naar mijn andere site configuratie bestanden. Elk bestand is specifiek voor een domein of subdomein dit configuratie bestand heeft ook de respectiefelijke naam van deze domein of subdomein.
 
 De caddy configuratie bestanden zijn te vinden in `/etc/caddy`.
 In deze map zijn de `Caddyfile` en `sites` folder te vinden.
@@ -45,7 +45,7 @@ Caddy runt als een service, en is geinstalleerd via apt.
 
 ## Ansible
 
-- core: Alle systemen die weker aanwezig moeten zijn voor een basis werking.
+- core: Alle systemen die aanwezig moeten zijn voor een basis werking.
 - docker: Alles wat met docker te maken heeft.
 - services: Andere services die op de server staan.
 
@@ -64,7 +64,7 @@ Dit op host een index pagina met alle services die dan ook beschikbaar zijn als 
 
 `/etc/systemd/system`
 
-Runnen allemaal in services die in de map /etc/systemd/system zitten.
+De gameservers runnen allemaal in services die in de map /etc/systemd/system zitten.
 Services hebben een prefix "custom-" zodat de service bestanden die gebackupt moeten worden gemakkelijk gescheiden kunnen worden van de normale system files.
 
 ## Scripts
