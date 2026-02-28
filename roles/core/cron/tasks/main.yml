@@ -7,13 +7,6 @@
         hour: "0"
         job: "{{ scriptsfolder }}/borgbackup.sh"
 
-    - name: Mirror crontab job
-      cron:
-        name: Mirror sync job
-        minute: "0"
-        hour: "2"
-        job: "{{ scriptsfolder }}/sync.sh"
-
     - name: Duckdns crontab job
       cron:
         name: Duckdns job
