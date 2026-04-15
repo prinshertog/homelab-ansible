@@ -1,0 +1,33 @@
+- name: Cronjobs
+  block:
+    - name: Crontab job for Hetzner cloud borg repo
+      cron:
+        name: Borg Backup Cloud
+        minute: "0"
+        hour: "0"
+        job: "{{ scriptsfolder }}/borgbackup.sh"
+
+    - name: Crontab job for Voyager1 borg repo
+      cron:
+        name: Borg backup Voyager1
+        minute: "0"
+        hour: "1"
+        job: "{{ scriptsfolder }}/borgbackup-voyager1.sh"
+
+    - name: DynDNS crontab job
+      cron:
+        name: DynDNS job
+        minute: "*/5"
+        job: "{{ scriptsfolder }}/dyndns.sh"
+
+    - name: Nextcloud
+      cron:
+        name: Nextcloud
+        minute: "*/5"
+        job: "/usr/bin/docker exec -u www-data nextcloud-app-1 php /var/www/html/cron.php"
+
+    - name: MC MODDED
+      cron:
+        name: MC MODDED restart job
+        hour: "*/2"
+        minute: "0"
