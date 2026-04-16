@@ -31,3 +31,4 @@
         name: MC MODDED restart job
         hour: "*/2"
         minute: "0"
+        job: "/opt/docker/minecraft-server-create-v3/mcrcon/restart.sh"

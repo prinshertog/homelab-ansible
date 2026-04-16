@@ -35,7 +35,7 @@
 - name: Create group dockeruser for docker
   group:
     name: dockeruser
-    uid: 1001
+    uid: 1010
     state: present
 
 - name: Create user dockeruser for docker

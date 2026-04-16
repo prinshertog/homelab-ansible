@@ -8,14 +8,15 @@
     - core/other/packages
     - core/other/users
     - core/other/keys
-    - core/restore_hetzner/caddy
-    - core/restore_hetzner/scripts
+    - core/restore_hetzner/repo_check
+    # - core/restore_hetzner/caddy
+    # - core/restore_hetzner/scripts
     - core/other/cron
-    - core/restore_hetzner/restore_opt
-    - core/restore_hetzner/wireguard
+    # - core/restore_hetzner/restore_opt
+    # - core/restore_hetzner/wireguard
     - docker/install_docker
     - docker/containers
-    - core/restore_hetzner/restore_service_files
-    - core/restore_hetzner/websites
-    - core/restore_hetzner/samba
+    # - core/restore_hetzner/restore_service_files
+    # - core/restore_hetzner/websites
+    # - core/restore_hetzner/samba
     - core/other/install_steamcmd

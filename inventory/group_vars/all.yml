@@ -1,4 +1,4 @@
-VERSION: 2025-11-11_20:11
+VERSION: 2026-04-15_00:00
 websitefolder: /var/www/html
 scriptsfolder: /etc/scripts
 sambaconfigfolder: /etc/samba

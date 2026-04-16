@@ -1,0 +1,7 @@
+- name: Verify archive exists
+  shell: 
+    cmd: borg list --last 1 {{ BORG_REPO }}
+  environment:
+    BORG_RSH: "{{ BORG_RSH }}"
+    BORG_REPO: "{{ BORG_REPO }}"
+    BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
