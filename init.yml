@@ -5,18 +5,23 @@
   vars_files:
     - inventory/vars/secrets.yml
   roles:
-    - core/other/packages
-    - core/other/users
-    - core/other/keys
-    - core/restore_hetzner/repo_check
-    # - core/restore_hetzner/caddy
-    # - core/restore_hetzner/scripts
-    - core/other/cron
-    # - core/restore_hetzner/restore_opt
-    # - core/restore_hetzner/wireguard
+    - core/config/install_packages
+    - core/config/create_users
+    - core/config/install_keys
+    #- core/config/install_steamcmd
     - docker/install_docker
-    - docker/containers
-    # - core/restore_hetzner/restore_service_files
-    # - core/restore_hetzner/websites
-    # - core/restore_hetzner/samba
-    - core/other/install_steamcmd
+    - docker/config_docker
+    - core/restore_hetzner/repo_check
+    - core/restore_hetzner/restore_caddy
+    #- core/restore_hetzner/restore_opt
+    - core/restore_hetzner/restore_samba
+    - core/restore_hetzner/restore_scripts
+    #- core/restore_hetzner/restore_service_files
+    - core/restore_hetzner/restore_websites
+    - core/restore_hetzner/restore_wireguard
+    #- core/execution/setup_crons
+    #- core/execution/start_caddy
+    #- core/execution/start_samba
+    #- core/execution/start_wireguard
+    - tests/caddy_tests
+    - tests/keys_tests

@@ -16,9 +16,3 @@
         chdir: "{{ wireguardconfig }}"
       async: 3600
       poll: 10
-
-    - name: Enable and start wireguard
-      systemd:
-        name: "wg-quick@wg0"
-        enabled: true
-        state: restarted

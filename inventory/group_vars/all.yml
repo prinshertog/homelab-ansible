@@ -1,4 +1,4 @@
-VERSION: 2026-04-15_00:00
+VERSION: 2026-05-25_15:05
 websitefolder: /var/www/html
 scriptsfolder: /etc/scripts
 sambaconfigfolder: /etc/samba
@@ -28,7 +28,6 @@ packages:
   - iptables
   - samba
   - vim
-  - neovim
   - ncdu
   - ssh
   - tree

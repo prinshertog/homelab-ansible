@@ -20,6 +20,12 @@
         minute: "*/5"
         job: "{{ scriptsfolder }}/dyndns.sh"
 
+    - name: DynDNS crontab job
+      cron:
+        name: DynDNS job
+        minute: "*/5"
+        job: "{{ scriptsfolder }}/dyndns2.sh"
+
     - name: Nextcloud
       cron:
         name: Nextcloud

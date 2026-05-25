@@ -1,0 +1,5 @@
+- name: Enable and start wireguard
+  systemd:
+    name: "wg-quick@wg0"
+    enabled: true
+    state: restarted

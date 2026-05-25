@@ -21,8 +21,3 @@
         recurse: yes
         owner: root
         group: root
-
-    - name: Restart caddy
-      service:
-        name: caddy
-        state: restarted

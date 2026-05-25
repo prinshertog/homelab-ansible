@@ -22,8 +22,3 @@
         chdir: "{{ sambaconfigfolder }}"
       async: 3600
       poll: 10
-
-    - name: Restart samba
-      systemd:
-        name: smbd
-        state: restarted
