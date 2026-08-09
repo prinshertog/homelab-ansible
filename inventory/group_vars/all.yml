@@ -31,3 +31,5 @@ packages:
   - ncdu
   - ssh
   - tree
+  - podman
+  - podman-compose

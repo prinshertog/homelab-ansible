@@ -9,8 +9,9 @@
     - core/config/create_users
     - core/config/install_keys
     #- core/config/install_steamcmd
-    - docker/install_docker
-    - docker/config_docker
+    #- core/docker/install_docker
+    #- core/docker/config_docker
+    - core/podman/config_podman
     - core/restore_hetzner/repo_check
     - core/restore_hetzner/restore_caddy
     #- core/restore_hetzner/restore_opt
