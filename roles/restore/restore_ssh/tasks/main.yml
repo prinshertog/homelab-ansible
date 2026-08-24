@@ -1,0 +1,19 @@
+- name: SSH
+  block:
+    - name: Restore ssh for user jan
+      environment:
+        BORG_RSH: "{{ BORG_RSH }}"
+        BORG_REPO: "{{ BORG_REPO }}"
+        BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+      shell:
+        cmd: "borg extract --strip-components 3 -v --list {{ BORG_REPO }}::{{ VERSION }} /home/jan/.ssh"
+        chdir: "/home/jan/.ssh"
+
+    - name: Restore base ssh config
+      environment:
+        BORG_RSH: "{{ BORG_RSH }}"
+        BORG_REPO: "{{ BORG_REPO }}"
+        BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+      shell:
+        cmd: "borg extract --strip-components 2 -v --list {{ BORG_REPO }}::{{ VERSION }} /etc/ssh"
+        chdir: "/etc/ssh"

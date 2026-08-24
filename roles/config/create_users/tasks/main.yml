@@ -1,0 +1,19 @@
+# - name: Create users with home
+#   user:
+#     name: "{{ item }}"
+#     create_home: true
+#     shell: /bin/bash
+#   loop: "{{ users_with_home }}"
+
+- name: Create users without home
+  user:
+    name: "{{ item }}"
+    create_home: false
+    shell: /bin/bash
+  loop: "{{ users_no_home }}"
+
+# - name: Add jan to sudo group
+#   ansible.builtin.user:
+#     name: jan
+#     groups: sudo
+#     append: true

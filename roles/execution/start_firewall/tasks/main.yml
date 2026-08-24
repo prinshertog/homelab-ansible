@@ -1,0 +1,3 @@
+- name: Start firewall
+  ansible.builtin.shell:
+    cmd: /etc/scripts/firewall.sh

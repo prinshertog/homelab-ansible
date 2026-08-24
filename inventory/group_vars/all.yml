@@ -4,10 +4,10 @@ scriptsfolder: /etc/scripts
 sambaconfigfolder: /etc/samba
 caddyfolder: /etc/caddy
 wireguardconfig: /etc/wireguard
-users_with_home:
-  - jan
+BORG_RSH: "ssh -p 22 -i /root/.ssh/voyager1 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+BORG_REPO: "ssh://jan@192.168.0.166:22/mnt/HDD/garcon-backup"
+ansible_ssh_private_key_file: "~/.ssh/JANSERVER"
 users_no_home:
-  - mathijs
   - ignas
   - steam
   - dockeruser

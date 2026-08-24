@@ -1,0 +1,8 @@
+- name: Setup podman
+  block:
+    - name: Create a podman network
+      containers.podman.podman_network:
+        name: podman_network
+        subnet: 172.0.0.0/24
+      become: true
+      become_user: dockeruser

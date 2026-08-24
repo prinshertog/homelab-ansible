@@ -1,0 +1,25 @@
+- name: Start services
+  block:
+    - name: Restart caddy
+      service:
+        enabled: true
+        name: caddy
+        state: restarted
+
+    - name: Restart samba
+      systemd:
+        enabled: true
+        name: smbd
+        state: restarted
+
+    - name: Enable and start wireguard
+      systemd:
+        name: "wg-quick@wg0"
+        enabled: true
+        state: restarted
+
+    - name: Enable and start ssh
+      systemd:
+        name: ssh
+        enabled: true
+        state: restarted
