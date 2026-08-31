@@ -1,0 +1,11 @@
+- name: Restore root
+  block:
+    - name: Restore root files to root
+      environment:
+        BORG_RSH: "{{ BORG_RSH }}"
+        BORG_REPO: "{{ BORG_REPO }}"
+        BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+        BORG_RELOCATED_REPO_ACCESS_IS_OK: "yes"
+      shell:
+        cmd: "borg extract --strip-components 1 -v --list {{ BORG_REPO }}::{{ VERSION }} /root"
+        chdir: "/root"

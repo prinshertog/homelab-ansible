@@ -1,10 +1,17 @@
 - name: SSH
   block:
+    - name: Create .ssh folder for user jan
+      ansible.builtin.file:
+        path: /home/jan/.ssh
+        state: directory
+        mode: '0755'
+
     - name: Restore ssh for user jan
       environment:
         BORG_RSH: "{{ BORG_RSH }}"
         BORG_REPO: "{{ BORG_REPO }}"
         BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+        BORG_RELOCATED_REPO_ACCESS_IS_OK: "yes"
       shell:
         cmd: "borg extract --strip-components 3 -v --list {{ BORG_REPO }}::{{ VERSION }} /home/jan/.ssh"
         chdir: "/home/jan/.ssh"
@@ -14,6 +21,7 @@
         BORG_RSH: "{{ BORG_RSH }}"
         BORG_REPO: "{{ BORG_REPO }}"
         BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+        BORG_RELOCATED_REPO_ACCESS_IS_OK: "yes"
       shell:
         cmd: "borg extract --strip-components 2 -v --list {{ BORG_REPO }}::{{ VERSION }} /etc/ssh"
         chdir: "/etc/ssh"

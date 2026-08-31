@@ -8,6 +8,7 @@
         BORG_RSH: "{{ BORG_RSH }}"
         BORG_REPO: "{{ BORG_REPO }}"
         BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+        BORG_RELOCATED_REPO_ACCESS_IS_OK: "yes"
       shell:
         cmd: "borg extract --strip-components 2 -v --list {{ BORG_REPO }}::{{ VERSION }} {{ caddyfolder }}"
         chdir: "{{ caddyfolder }}"
@@ -17,14 +18,7 @@
         BORG_RSH: "{{ BORG_RSH }}"
         BORG_REPO: "{{ BORG_REPO }}"
         BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+        BORG_RELOCATED_REPO_ACCESS_IS_OK: "yes"
       shell:
-        cmd: "borg extract --strip-components 9 -v --list {{ BORG_REPO }}::{{ VERSION }} /var/lib/caddy/.local/share/caddy/pki/authorities/local"
-        chdir: "/var/lib/caddy/.local/share/caddy/pki/authorities"
-
-    - name: Change permissions to root
-      file:
-        path: "{{ caddyfolder }}"
-        state: directory
-        recurse: yes
-        owner: root
-        group: root
+        cmd: "borg extract --strip-components 3 -v --list {{ BORG_REPO }}::{{ VERSION }} /var/lib/caddy"
+        chdir: "/var/lib/caddy"

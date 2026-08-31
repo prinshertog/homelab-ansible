@@ -8,16 +8,16 @@
     - config/install_packages
     - config/create_users
     - config/config_podman
-    - config/install_steamcmd
+    - config/copy_voyager1_key
     - restore/repo_check
     - restore/restore_caddy
     - restore/restore_cron
-    - restore/restore_keys
+    - restore/restore_root
     - restore/restore_opt
     - restore/restore_samba
     - restore/restore_scripts
     - restore/restore_ssh
     - restore/restore_websites
     - restore/restore_wireguard
-    - execution/start_services
-    - execution/start_podman
+    # - execution/start_services
+    # - execution/start_podman

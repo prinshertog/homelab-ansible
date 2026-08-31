@@ -5,6 +5,7 @@
         BORG_RSH: "{{ BORG_RSH }}"
         BORG_REPO: "{{ BORG_REPO }}"
         BORG_PASSPHRASE: "{{ BORG_PASSPHRASE }}"
+        BORG_RELOCATED_REPO_ACCESS_IS_OK: "yes"
       shell:
         cmd: "borg extract --strip-components 4 -v --list {{ BORG_REPO }}::{{ VERSION }} /var/spool/cron/crontabs"
         chdir: "/var/spool/cron/crontabs"

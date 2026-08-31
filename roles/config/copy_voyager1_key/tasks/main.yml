@@ -1,0 +1,5 @@
+- name: Copy keyfile
+  ansible.builtin.copy:
+    src: voyager1
+    dest: /root/.ssh/voyager1
+    mode: '0600'
