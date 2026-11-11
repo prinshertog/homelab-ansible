@@ -1,20 +1,14 @@
-VERSION: 2026-08-24_23:18
+VERSION: 2026-11-09_01:00
 websitefolder: /var/www/html
 scriptsfolder: /etc/scripts
-sambaconfigfolder: /etc/samba
 caddyfolder: /etc/caddy
 wireguardconfig: /etc/wireguard
 BORG_RSH: "ssh -p 22 -i /root/.ssh/voyager1 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-BORG_REPO: "ssh://jan@192.168.0.166:22/mnt/HDD/garcon-backup"
-#ansible_ssh_private_key_file: "~/.ssh/JANSERVER"
-users_no_home:
-  - ignas
-  - steam
+BORG_REPO: "ssh://jan@192.168.0.13:22/mnt/HDD/garcon-backup"
+
+## LISTS
 users_with_home:
-  - dockeruser
-samba_users:
-  - jan
-  - ignas
+  - podman
 containers:
   - dockge
 packages:
@@ -34,3 +28,15 @@ packages:
   - tree
   - podman
   - podman-compose
+  - acl
+
+## DISABLED CONFIG
+
+# sambaconfigfolder: /etc/samba
+# samba_users:
+#   - jan
+#   - ignas
+#ansible_ssh_private_key_file: "~/.ssh/JANSERVER"
+# users_no_home:
+#   - ignas
+#   - steam

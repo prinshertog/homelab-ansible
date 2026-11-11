@@ -14,7 +14,7 @@
     - restore/restore_cron
     - restore/restore_root
     - restore/restore_opt
-    - restore/restore_samba
+    #- restore/restore_samba
     - restore/restore_scripts
     - restore/restore_ssh
     - restore/restore_websites
